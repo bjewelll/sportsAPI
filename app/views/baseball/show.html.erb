@@ -1,2 +1,80 @@
 <h1>Baseball#show</h1>
-<p>Find me in app/views/baseball/show.html.erb</p>
+<%='All Your Favorite Teams'%>
+<h2>Shows your favorite teams and allows further searches</h2>
+<p>Your favorite player search</p>
+<%= form_for(url: '/player', local: true) do |form| %>
+  <% if favorite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(favorite.errors.count, "error") %> prohibited this favorite from being saved:</h2>
+
+      <ul>
+      <% favorite.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :fname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :lname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :search %>
+    <%= form.text_field :search %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stat %>
+    <%= form.text_field :stat %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<hr>
+<p>Your favorite player search</p>
+<%= form_for(url: '/team', local: true) do |form| %>
+  <% if favorite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(favorite.errors.count, "error") %> prohibited this favorite from being saved:</h2>
+
+      <ul>
+      <% favorite.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :search %>
+    <%= form.text_field :search %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stat %>
+    <%= form.text_field :stat %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
