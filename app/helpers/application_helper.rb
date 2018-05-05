@@ -9,5 +9,6 @@ module ApplicationHelper
   def _team_var(city, name, search, stat)
     data = MSF.msf_get_data("mlb", "2016-2017-regular", search, "json",
        "team" => "#{city}-#{name}", "teamstats" => stat)
+       return data
   end
 end

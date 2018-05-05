@@ -13,12 +13,12 @@
 ActiveRecord::Schema.define(version: 2018_05_01_173456) do
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id_id"
-    t.integer "team_id_id"
+    t.integer "user_id_id_id"
+    t.string "city"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id_id"], name: "index_favorites_on_team_id_id"
-    t.index ["user_id_id"], name: "index_favorites_on_user_id_id"
+    t.index ["user_id_id_id"], name: "index_favorites_on_user_id_id_id"
   end
 
   create_table "users", force: :cascade do |t|

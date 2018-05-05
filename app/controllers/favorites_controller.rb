@@ -25,18 +25,24 @@ class FavoritesController < ApplicationController
   # POST /favorites.json
   def create
     @favorite = Favorite.new(favorite_params)
-    
-
-
-    respond_to do |format|
-      if @favorite.save
-        format.html { redirect_to @favorite, notice: 'Favorite was successfully created.' }
-        format.json { render :show, status: :created, location: @favorite }
-      else
-        format.html { render :new }
-        format.json { render json: @favorite.errors, status: :unprocessable_entity }
-      end
+    @favorite.user_id = current_user.id
+    if @favorite.save
+      redirect_to favorite_path
+    else
+      flash['error'] = "Big Error"
+      render :index
     end
+
+    #respond_to do |format|
+    #  if @favorite.save
+    #    format.html { redirect_to @favorite, notice: 'Favorite was    #successfully created.' }
+    #    format.json { render :show, status: :created, location: @favorite }
+  #    else
+    #    format.html { render :new }
+    #  format.json { render json: @favorite.errors, status:
+    # :unprocessable_entity }
+  #    end
+  #  end
   end
 
   # PATCH/PUT /favorites/1
@@ -70,7 +76,8 @@ class FavoritesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    #{"team":{"ID":"134","City":"Milwaukee","Name":"Brewers","Abbreviation":"MIL"}
     def favorite_params
-      params.require(:favorite).permit(:user_id_id, :team_id_id)
+      params.permit(:user_id, :city. :name)
     end
 end

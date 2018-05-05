@@ -10,7 +10,7 @@ Things you may want to cover:
 * System dependencies
 
 * Configuration
-
+{"team":{"ID":"134","City":"Milwaukee","Name":"Brewers","Abbreviation":"MIL"}
 * Database creation
 ####library
 @valid_feeds = [
