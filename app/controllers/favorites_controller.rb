@@ -4,7 +4,6 @@ class FavoritesController < ApplicationController
   # GET /favorites
   # GET /favorites.json
   def index
-    #@teams = Array.new{Hash.new}
 
     @favorites = Favorite.all
     @data = MSF.msf_get_data('mlb', '2017-regular', 'overall_team_standings', 'json', "team" => "" )
@@ -17,11 +16,23 @@ class FavoritesController < ApplicationController
     @ateams = @bteams.fetch('teamstandingsentry')
     puts @ateams
     puts "_________________"
-    @ateams.each do |obj|
-      @teams = obj.select{|el| el == "team"}
-      puts @teams
-    end
-    
+      @ateams.each do |obj|
+        @teams = obj.select{|el| el == "team"}
+        puts @teams
+      end
+    puts "---------------------------------"
+      @teams.each do |steam|
+        #puts steam[1][6] 
+        puts steam[1]
+        @obj = steam[1]
+        @teamArr = @obj.flatten
+        puts @teamArr
+      end
+    puts "ooooooooooooooo"
+    puts @teamArr[3]
+    puts @teamArr[5]
+    puts "OOOOOoooooOOOooooOOoooo"
+
   end
 
   # GET /favorites/1

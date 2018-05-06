@@ -10,11 +10,7 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-  <%=@teams.each do |team| %>
-  <%=team['city']%>
-  <%=team['name']%>
-  <%=link_to "Add Favorite", favorites_create_path(city, name), method: :post%>
-  <%end%>
+
   <tbody>
     <% @favorites.each do |favorite| %>
       <tr>
