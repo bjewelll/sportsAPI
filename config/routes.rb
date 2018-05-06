@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'users/index'
-  get 'users/show'
+
   post 'baseball/player'
   post 'baseball/team'
   resources :favorites, :baseball

@@ -1,15 +1,34 @@
 class FavoritesController < ApplicationController
-  before_action :set_favorite, only: [:show, :edit, :update, :destroy]
+  #before_action :set_favorite, only: [:show, :edit, :update, :destroy]
 
   # GET /favorites
   # GET /favorites.json
   def index
-    @favorite = Favorite.all
+    #@teams = Array.new{Hash.new}
+
+    @favorites = Favorite.all
+    @data = MSF.msf_get_data('mlb', '2017-regular', 'overall_team_standings', 'json', "team" => "" )
+    puts "**********************"
+    puts @data
+    puts "******************"
+    @bteams = @data.fetch('overallteamstandings')
+    puts @bteams
+    puts "____________________"
+    @ateams = @bteams.fetch('teamstandingsentry')
+    puts @ateams
+    puts "_________________"
+    @ateams.each do |obj|
+      @teams = obj.select{|el| el == "team"}
+      puts @teams
+    end
+    
   end
 
   # GET /favorites/1
   # GET /favorites/1.json
   def show
+    @favorite = Favorite.all
+
   end
 
   # GET /favorites/new
@@ -71,13 +90,13 @@ class FavoritesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_favorite
-      @favorite = Favorite.find(params[:id])
-    end
+    #def set_favorite
+    #  @favorite = Favorite.find(params[:id])
+    #end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     #{"team":{"ID":"134","City":"Milwaukee","Name":"Brewers","Abbreviation":"MIL"}
     def favorite_params
-      params.permit(:user_id, :city. :name)
+      params.require(:favorite).permit(:user_id, :city, :name)
     end
 end

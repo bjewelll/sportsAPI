@@ -1,4 +1,4 @@
 <h1>Baseball Team Picks</h1>
 <p>Pick Teams</p>
-<p><%='@team.list' %></p>
-<%=link_to 'See Your Favorites', 'baseball/show'%>
+
+<%=link_to 'See Your Favorites', favorite_path(:user_id)%>
