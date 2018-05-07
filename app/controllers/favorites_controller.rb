@@ -24,6 +24,8 @@ class FavoritesController < ApplicationController
   def show
     @favorite = Favorite.find(params[:id])
 
+    @favorite = Favorite.find(params[:user_id])
+    
   end
 
   # GET /favorites/new
