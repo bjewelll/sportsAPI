@@ -14,8 +14,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    #instruction page
-
+    @user = User.find(params[:id])
+    @favorites = @user.favorites
   end
 
 

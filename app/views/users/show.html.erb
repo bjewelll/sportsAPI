@@ -1,2 +1,7 @@
 <h1>Users#show</h1>
-<p>Hellow <%=User.email%></p>
+<p>Hellow <%=@user.email%></p>
+<%= @favorites.each do |e| %>
+<p><%=e.city%></p>
+<p><%=e.name%></p>
+
+<%end%>
