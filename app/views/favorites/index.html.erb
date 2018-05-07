@@ -10,7 +10,6 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @favorites.each do |favorite| %>
       <tr>
@@ -22,9 +21,18 @@
         <td><%= link_to 'Destroy', favorite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <% @teams.each do |team| %>
+<div class="actions">
+    <%= form_for :favorite, url: favorites_path, method: :post do |form| %>
+      <%= form.hidden_field :city, value: team["team"]["City"] %>
+      <%= form.hidden_field :name, value: team["team"]["Name"] %>
+        <%= form.submit "#{team["team"]["City"]} #{team["team"]["Name"]}" %>
+      </div>
+      <% end %>
+    <% end %>
+
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Favorite', favorite_path(:user_id) %>
+<%= link_to 'See Favorite', favorite_path(:user_id) %>

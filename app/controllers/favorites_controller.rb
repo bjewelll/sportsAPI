@@ -7,39 +7,22 @@ class FavoritesController < ApplicationController
 
     @favorites = Favorite.all
     @data = MSF.msf_get_data('mlb', '2017-regular', 'overall_team_standings', 'json', "team" => "" )
-    puts "**********************"
-    puts @data
-    puts "******************"
     @bteams = @data.fetch('overallteamstandings')
-    puts @bteams
     puts "____________________"
     @ateams = @bteams.fetch('teamstandingsentry')
-    puts @ateams
+    @teams = []
     puts "_________________"
       @ateams.each do |obj|
-        @teams = obj.select{|el| el == "team"}
+        @teams << obj.select{|el| el == "team"}
         puts @teams
       end
-    puts "---------------------------------"
-      @teams.each do |steam|
-        #puts steam[1][6] 
-        puts steam[1]
-        @obj = steam[1]
-        @teamArr = @obj.flatten
-        puts @teamArr
-      end
-    puts "ooooooooooooooo"
-    puts @teamArr[3]
-    puts @teamArr[5]
-    puts "OOOOOoooooOOOooooOOoooo"
-
+    p @teams
   end
 
   # GET /favorites/1
   # GET /favorites/1.json
   def show
-    @favorite = Favorite.all
-
+    @favorite = Favorite.find(params[:id])
   end
 
   # GET /favorites/new
@@ -57,7 +40,7 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.new(favorite_params)
     @favorite.user_id = current_user.id
     if @favorite.save
-      redirect_to favorite_path
+      redirect_to favorite_path @favorite
     else
       flash['error'] = "Big Error"
       render :index
@@ -108,6 +91,6 @@ class FavoritesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     #{"team":{"ID":"134","City":"Milwaukee","Name":"Brewers","Abbreviation":"MIL"}
     def favorite_params
-      params.require(:favorite).permit(:user_id, :city, :name)
+      params.require(:favorite).permit(:city, :name)
     end
 end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   post 'baseball/player'
   post 'baseball/team'
   resources :favorites, :baseball
