@@ -22,10 +22,9 @@ class FavoritesController < ApplicationController
   # GET /favorites/1
   # GET /favorites/1.json
   def show
-    @favorite = Favorite.find(params[:id])
-
-    @favorite = Favorite.find(params[:user_id])
     
+    @user = User.find(params[:id])
+    @favorites = @user.favorites
   end
 
   # GET /favorites/new
